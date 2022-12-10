@@ -13,16 +13,24 @@
         <input type="submit" name="add" id="add" value="Add">
         {% for i in genre_data %}
         <div>
-            <input type="checkbox" id="genre" name="genre">
-            <label for="genre">{{i[1]}}</label>
+            <input type="checkbox" id="genre" name="genre" value="{{i[0]}}">{{i[1]}}
         </div>
         {% endfor %}
     </form>
     <h3>{{ message }}</h3>
-    {% for i in data %}
-    <h4>id: {{i[0]}}</h4>
-    <h4>title: {{i[1]}}</h4>
-    <h4>description: {{i[2]}}</h4>
+    {% for i in result %}
+    <div style="border: 2px solid grey;
+                display: flex;
+                flex-direction: row;">
+        <div style="border: 2px solid black;
+                    flex-grow: 1;"><h4>Title: {{i[0]}}</h4></div>
+        <div style="border: 2px solid black;
+                    flex-grow: 1;"><h4>Description: {{i[1]}}</h4></div>
+        <div style="border: 2px solid black;
+                    flex-grow: 1;"><h4>Genre: {{i[2]}}</h4></div>
+        <div style="border: 2px solid black;
+                    flex-grow: 1;"><h4>Genre description: {{i[3]}}</h4></div>
+    </div>
     {% endfor %}
 </body>
 </html>

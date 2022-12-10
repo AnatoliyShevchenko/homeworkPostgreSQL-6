@@ -99,6 +99,16 @@ class Connecting():
         self.connection.commit()
         return data
 
+    def get_game_id(self, title):
+        data: tuple = []
+        with self.connection.cursor() as cursor:
+            cursor.execute(f"""
+                SELECT * FROM games WHERE title='{title}'
+            """)
+            data = cursor.fetchall()
+        self.connection.commit()
+        return data
+
     def res(self, game_id, genre_id):
         with self.connection.cursor() as cursor:
             cursor.execute(f"""
@@ -107,3 +117,15 @@ class Connecting():
             """)
         self.connection.commit()
         print('ADDED!')
+
+    def list_result(self):
+        data: list[tuple] = []
+        with self.connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT games.title, games.description, genres.title, genres.description FROM result
+                INNER JOIN games ON result.game_id = games.id
+                INNER JOIN genres ON result.genre_id = genres.id;
+            """)
+            data = cursor.fetchall()
+        self.connection.commit()
+        return data
